@@ -8,9 +8,10 @@ import java.util.LinkedList;
 
 public class RegistrarUsuario extends javax.swing.JDialog {
 
-    private final Avatar avatar;
+    
     private final Juego juego;
-    private final Jugador jugador;
+    private Jugador jugador;
+    private Avatar avatar;
 
     public RegistrarUsuario(java.awt.Frame parent, boolean modal, Juego juego) {
         super(parent, modal);
@@ -159,22 +160,28 @@ public class RegistrarUsuario extends javax.swing.JDialog {
             System.out.println("Nombre de jugador y avatar son obligatorios");
         } else {
 
-            //crear jugador con nombre usuario, avatar y monedero
-            this.jugador.setNombreUsuario(jtfJugadorUno.getText());
-            this.jugador.setAvatar(this.avatar);
-            Moneda moneda = new Moneda(jugador.getNombreUsuario());
-            LinkedList<Moneda> monedero = new LinkedList<>();
-            monedero.add(moneda);
-            this.jugador.setMonedero(monedero);
+            if(validarCantidadJugadores()){
+                //crear jugador con nombre usuario, avatar y monedero
+                this.jugador = new Jugador(0, 0);
+                this.jugador.setNombreUsuario(jtfJugadorUno.getText());
+                this.jugador.setAvatar(this.avatar);
+                Moneda moneda = new Moneda(jugador.getNombreUsuario());
+                LinkedList<Moneda> monedero = new LinkedList<>();
+                monedero.add(moneda);
+                this.jugador.setMonedero(monedero);
 
-            //guardar jugador en la lista de jugadores del juego
-            LinkedList<Jugador> jugadores = this.juego.getJugadores();
-            jugadores.add(this.jugador);
+                //guardar jugador en la lista de jugadores del juego
+                LinkedList<Jugador> jugadores = this.juego.getJugadores();
+                jugadores.add(this.jugador);
 
-            //reiniciar pantalla
-            limpiarCampos();
+                //reiniciar pantalla
+                limpiarCampos();
 
-            System.out.println("jugador registrado");
+                System.out.println("jugador registrado: " + this.jugador.toString());    
+            }else{
+                System.out.println("Limite de jugadores alcanzado."); 
+            }
+            
         }
     }//GEN-LAST:event_jbtRegistrarActionPerformed
 
@@ -189,6 +196,13 @@ public class RegistrarUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField jtfJugadorUno;
     // End of variables declaration//GEN-END:variables
 
+    private boolean validarCantidadJugadores(){
+        if (this.juego.getJugadores().size() < this.juego.getIdJuego()) {
+            return true;
+        }
+        return false;
+    }
+    
     private void limpiarCampos() {
 
     }
