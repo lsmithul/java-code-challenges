@@ -11,6 +11,11 @@ public class Moneda {
         this.idMoneda = idMoneda;
     }
 
+    @Override
+    public String toString() {
+        return "Moneda{" + "idMoneda=" + idMoneda + '}';
+    }
+
     public String getIdMoneda() {
         return idMoneda;
     }
