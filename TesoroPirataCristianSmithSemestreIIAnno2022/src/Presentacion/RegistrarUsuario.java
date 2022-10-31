@@ -8,8 +8,7 @@ import java.util.LinkedList;
 
 public class RegistrarUsuario extends javax.swing.JDialog {
 
-    
-    private final Juego juego;
+    private Juego juego;
     private Jugador jugador;
     private Avatar avatar;
 
@@ -159,29 +158,35 @@ public class RegistrarUsuario extends javax.swing.JDialog {
                 && this.avatar.getIdavatar().equalsIgnoreCase("")) {
             System.out.println("Nombre de jugador y avatar son obligatorios");
         } else {
+            //valida cantidad de jugadores resgistrados
+            if (validarCantidadJugadores()) {
+                //valida si ya el nombre de usuario existe
+                if (existeJugador(jtfJugadorUno.getText())) {
+                    System.out.println("Jugador ya esta registrado");
+                } else {
+                    //crear jugador con nombre usuario, avatar y monedero
+                    this.jugador = new Jugador(0, 0);
+                    this.jugador.setNombreUsuario(jtfJugadorUno.getText());
+                    this.jugador.setAvatar(this.avatar);
+                    Moneda moneda = new Moneda(jugador.getNombreUsuario());
+                    LinkedList<Moneda> monedero = new LinkedList<>();
+                    monedero.add(moneda);
+                    this.jugador.setMonedero(monedero);
 
-            if(validarCantidadJugadores()){
-                //crear jugador con nombre usuario, avatar y monedero
-                this.jugador = new Jugador(0, 0);
-                this.jugador.setNombreUsuario(jtfJugadorUno.getText());
-                this.jugador.setAvatar(this.avatar);
-                Moneda moneda = new Moneda(jugador.getNombreUsuario());
-                LinkedList<Moneda> monedero = new LinkedList<>();
-                monedero.add(moneda);
-                this.jugador.setMonedero(monedero);
+                    //guardar jugador en la lista de jugadores del juego
+                    LinkedList<Jugador> jugadores = this.juego.getJugadores();
+                    jugadores.add(this.jugador);
 
-                //guardar jugador en la lista de jugadores del juego
-                LinkedList<Jugador> jugadores = this.juego.getJugadores();
-                jugadores.add(this.jugador);
+                    //reiniciar pantalla
+                    limpiarCampos();
 
-                //reiniciar pantalla
-                limpiarCampos();
+                    System.out.println("jugador registrado: " + this.jugador.toString());
+                }
 
-                System.out.println("jugador registrado: " + this.jugador.toString());    
-            }else{
-                System.out.println("Limite de jugadores alcanzado."); 
+            } else {
+                System.out.println("Limite de jugadores alcanzado.");
             }
-            
+
         }
     }//GEN-LAST:event_jbtRegistrarActionPerformed
 
@@ -196,21 +201,39 @@ public class RegistrarUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField jtfJugadorUno;
     // End of variables declaration//GEN-END:variables
 
-    private boolean validarCantidadJugadores(){
+    private boolean validarCantidadJugadores() {
         if (this.juego.getJugadores().size() < this.juego.getIdJuego()) {
             return true;
         }
         return false;
     }
-    
+
+    //valida el nombre de usuario, busca en la lista de jugadores registrados 
+    //actualmente en mi objeto Juego y valida comparando la lista
+    private boolean existeJugador(String nombreDeUsuario) {
+
+        boolean yaExisteJugador = false;
+
+        for (Jugador jugador : this.juego.getJugadores()) {
+            if (jugador.getNombreUsuario().equalsIgnoreCase(nombreDeUsuario)) {
+                yaExisteJugador = true;
+            }
+        }
+
+        return yaExisteJugador;
+    }
+
+    //limpia los campos 
     private void limpiarCampos() {
 
     }
 
+    //muestra mensaje para el usuario
     private void mostrarMensaje(String Tipo, String Mensaje) {
 
     }
 
+    //reinicia el estado de los botones 
     private void reiniciarEstadoBotones(String nombreBoton) {
 
     }
