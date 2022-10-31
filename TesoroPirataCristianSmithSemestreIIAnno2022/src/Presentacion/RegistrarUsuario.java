@@ -4,7 +4,9 @@ import Dominio.Avatar;
 import Dominio.Juego;
 import Dominio.Jugador;
 import Dominio.Moneda;
+import java.awt.Color;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 public class RegistrarUsuario extends javax.swing.JDialog {
 
@@ -15,7 +17,7 @@ public class RegistrarUsuario extends javax.swing.JDialog {
     public RegistrarUsuario(java.awt.Frame parent, boolean modal, Juego juego) {
         super(parent, modal);
         this.avatar = new Avatar();
-        this.avatar.setIdavatar("");
+        this.avatar.setIdAvatar("");
         this.juego = juego;
         this.juego.setJugadores(new LinkedList<>());
         this.jugador = new Jugador(0, 0);
@@ -27,8 +29,8 @@ public class RegistrarUsuario extends javax.swing.JDialog {
     private void initComponents() {
 
         jbtMenuPrincipal = new javax.swing.JButton();
-        jlJugadorUno = new javax.swing.JLabel();
-        jtfJugadorUno = new javax.swing.JTextField();
+        jlJugador = new javax.swing.JLabel();
+        jtfJugador = new javax.swing.JTextField();
         jbtAvatarUno = new javax.swing.JButton();
         jbtAvatarDos = new javax.swing.JButton();
         jbtAvatarTres = new javax.swing.JButton();
@@ -45,7 +47,7 @@ public class RegistrarUsuario extends javax.swing.JDialog {
             }
         });
 
-        jlJugadorUno.setText("Nombre jugador : ");
+        jlJugador.setText("Nombre jugador : ");
 
         jbtAvatarUno.setText("avatar1");
         jbtAvatarUno.addActionListener(new java.awt.event.ActionListener() {
@@ -99,9 +101,9 @@ public class RegistrarUsuario extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jbtAvatarDos, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlJugadorUno)
+                        .addComponent(jlJugador)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfJugadorUno))
+                        .addComponent(jtfJugador))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbtMenuPrincipal)
                         .addGap(18, 18, 18)
@@ -113,8 +115,8 @@ public class RegistrarUsuario extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlJugadorUno)
-                    .addComponent(jtfJugadorUno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlJugador)
+                    .addComponent(jtfJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtAvatarUno, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,35 +140,39 @@ public class RegistrarUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtMenuPrincipalActionPerformed
 
     private void jbtAvatarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAvatarUnoActionPerformed
-        this.avatar.setIdavatar(jbtAvatarUno.getText());
+        this.avatar.setIdAvatar(jbtAvatarUno.getText());
+        reiniciarEstadoBotones("jbtAvatarUno");
     }//GEN-LAST:event_jbtAvatarUnoActionPerformed
 
     private void jbtAvatarDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAvatarDosActionPerformed
-        this.avatar.setIdavatar(jbtAvatarDos.getText());
+        this.avatar.setIdAvatar(jbtAvatarDos.getText());
+        reiniciarEstadoBotones("jbtAvatarDos");
     }//GEN-LAST:event_jbtAvatarDosActionPerformed
 
     private void jbtAvatarTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAvatarTresActionPerformed
-        this.avatar.setIdavatar(jbtAvatarTres.getText());
+        this.avatar.setIdAvatar(jbtAvatarTres.getText());
+        reiniciarEstadoBotones("jbtAvatarTres");
     }//GEN-LAST:event_jbtAvatarTresActionPerformed
 
     private void jbtAvatarCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAvatarCuatroActionPerformed
-        this.avatar.setIdavatar(jbtAvatarCuatro.getText());
+        this.avatar.setIdAvatar(jbtAvatarCuatro.getText());
+        reiniciarEstadoBotones("jbtAvatarCuatro");
     }//GEN-LAST:event_jbtAvatarCuatroActionPerformed
 
     private void jbtRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRegistrarActionPerformed
-        if (jtfJugadorUno.getText().equalsIgnoreCase("")
-                && this.avatar.getIdavatar().equalsIgnoreCase("")) {
-            System.out.println("Nombre de jugador y avatar son obligatorios");
+        if (jtfJugador.getText().equalsIgnoreCase("")
+                || this.avatar.getIdAvatar().equalsIgnoreCase("")) {
+            mostrarMensaje("Nombre de jugador y avatar son obligatorios", 2);
         } else {
             //valida cantidad de jugadores resgistrados
             if (validarCantidadJugadores()) {
                 //valida si ya el nombre de usuario existe
-                if (existeJugador(jtfJugadorUno.getText())) {
-                    System.out.println("Jugador ya esta registrado");
+                if (existeJugador(jtfJugador.getText())) {
+                    mostrarMensaje("Jugador ya esta registrado", 0);
                 } else {
                     //crear jugador con nombre usuario, avatar y monedero
                     this.jugador = new Jugador(0, 0);
-                    this.jugador.setNombreUsuario(jtfJugadorUno.getText());
+                    this.jugador.setNombreUsuario(jtfJugador.getText());
                     this.jugador.setAvatar(this.avatar);
                     Moneda moneda = new Moneda(jugador.getNombreUsuario());
                     LinkedList<Moneda> monedero = new LinkedList<>();
@@ -177,17 +183,27 @@ public class RegistrarUsuario extends javax.swing.JDialog {
                     LinkedList<Jugador> jugadores = this.juego.getJugadores();
                     jugadores.add(this.jugador);
 
-                    //reiniciar pantalla
-                    limpiarCampos();
-
+                    mostrarMensaje("jugador registrado: " + this.jugador.getNombreUsuario(), 1);
                     System.out.println("jugador registrado: " + this.jugador.toString());
+
+                    limpiarCampos();
                 }
 
             } else {
-                System.out.println("Limite de jugadores alcanzado.");
+                mostrarMensaje("Limite de jugadores alcanzado.", 0);
             }
 
         }
+        
+        //listo para tirar ruleta?
+        if(partidaLista()){
+            mostrarMensaje("Jugadores listos, se mostrara la pantalla de tirar ruleta", 1);
+            //iniciar Jdialog de ruleta
+            System.out.println("Iniciando ruleta...");
+        }else{
+            System.out.println("todavia faltan jugadores para tirar ruleta..");
+        }
+        
     }//GEN-LAST:event_jbtRegistrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -197,8 +213,8 @@ public class RegistrarUsuario extends javax.swing.JDialog {
     private javax.swing.JButton jbtAvatarUno;
     private javax.swing.JButton jbtMenuPrincipal;
     private javax.swing.JButton jbtRegistrar;
-    private javax.swing.JLabel jlJugadorUno;
-    private javax.swing.JTextField jtfJugadorUno;
+    private javax.swing.JLabel jlJugador;
+    private javax.swing.JTextField jtfJugador;
     // End of variables declaration//GEN-END:variables
 
     private boolean validarCantidadJugadores() {
@@ -225,17 +241,58 @@ public class RegistrarUsuario extends javax.swing.JDialog {
 
     //limpia los campos 
     private void limpiarCampos() {
-
+        jtfJugador.setText("");
+        jbtAvatarUno.setEnabled(true);
+        jbtAvatarDos.setEnabled(true);
+        jbtAvatarTres.setEnabled(true);
+        jbtAvatarCuatro.setEnabled(true);
+        this.avatar.setIdAvatar("");
     }
 
     //muestra mensaje para el usuario
-    private void mostrarMensaje(String Tipo, String Mensaje) {
-
+    private void mostrarMensaje(String mensaje, int messageType) {
+        //error = 0
+        //info = 1
+        //warning = 2
+        JOptionPane.showMessageDialog(null, mensaje, "Atencion", messageType);
     }
 
     //reinicia el estado de los botones 
     private void reiniciarEstadoBotones(String nombreBoton) {
-
+        switch (nombreBoton) {
+            case "jbtAvatarUno":
+                jbtAvatarUno.setEnabled(false);
+                jbtAvatarDos.setEnabled(true);
+                jbtAvatarTres.setEnabled(true);
+                jbtAvatarCuatro.setEnabled(true);
+                break;
+            case "jbtAvatarDos":
+                jbtAvatarUno.setEnabled(true);
+                jbtAvatarDos.setEnabled(false);
+                jbtAvatarTres.setEnabled(true);
+                jbtAvatarCuatro.setEnabled(true);
+                break;
+            case "jbtAvatarTres":
+                jbtAvatarUno.setEnabled(true);
+                jbtAvatarDos.setEnabled(true);
+                jbtAvatarTres.setEnabled(false);
+                jbtAvatarCuatro.setEnabled(true);
+                break;
+            case "jbtAvatarCuatro":
+                jbtAvatarUno.setEnabled(true);
+                jbtAvatarDos.setEnabled(true);
+                jbtAvatarTres.setEnabled(true);
+                jbtAvatarCuatro.setEnabled(false);
+                break;
+        }
     }
-
+    
+    //verifica si la partida esta lista para iniciar la ruleta
+    private boolean partidaLista(){
+        boolean laPartidaEstaLista = false; 
+        if(this.juego.getJugadores().size() == this.juego.getIdJuego()){
+            laPartidaEstaLista = true;
+        }
+        return laPartidaEstaLista;
+    }
 }
