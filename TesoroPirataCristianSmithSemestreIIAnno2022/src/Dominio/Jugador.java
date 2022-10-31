@@ -1,4 +1,3 @@
-
 package Dominio;
 
 import java.awt.Graphics;
@@ -7,23 +6,26 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
 
 public class Jugador extends Sprite{
 
     private String nombreUsuario;
     private int turno;
+    private int numeroRuleta;
     private boolean Activo;
     private LinkedList<Moneda> monedero;
     private Avatar avatar;
 
     
+    public Jugador(){
+    
+    }
+    
     public Jugador(int posX, int posY){
         super(posX, posY);
     }
     
-    public Jugador(int posX, int posY,String nombreUsuario, int turno, boolean Activo, LinkedList<Moneda> monedero, Avatar avatar) {
+    public Jugador(int posX, int posY,String nombreUsuario, int turno, boolean Activo, LinkedList<Moneda> monedero, Avatar avatar, int numeroRuleta) {
         super(posX, posY);
         try {
             this.imagen=ImageIO.read(getClass().getResourceAsStream(""));
@@ -35,6 +37,7 @@ public class Jugador extends Sprite{
         this.Activo = Activo;
         this.monedero = monedero;
         this.avatar = avatar;
+        this.numeroRuleta = numeroRuleta;
     }//Fin constructor
     
     public String getNombreUsuario() {
@@ -82,11 +85,17 @@ public class Jugador extends Sprite{
         
     }
 
+    public int getNumeroRuleta() {
+        return numeroRuleta;
+    }
+
+    public void setNumeroRuleta(int numeroRuleta) {
+        this.numeroRuleta = numeroRuleta;
+    }
+
     @Override
     public String toString() {
-        return "Jugador{" + "nombreUsuario=" + nombreUsuario + ", turno=" + turno + ", Activo=" + Activo + ", monedero=" + monedero + ", avatar=" + avatar.toString() + '}';
+        return "Jugador{" + "nombreUsuario=" + nombreUsuario + ", turno=" + turno + ", numeroRuleta=" + numeroRuleta + ", Activo=" + Activo + ", monedero=" + monedero + ", avatar=" + avatar.toString() + '}';
     }
-    
-    
-    
+ 
 }//Fin clase

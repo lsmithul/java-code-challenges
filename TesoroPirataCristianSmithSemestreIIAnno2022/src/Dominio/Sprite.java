@@ -9,10 +9,11 @@ public abstract class Sprite {
     protected double posY;
     protected BufferedImage imagen;
 
+    public Sprite(){}
+    
     public Sprite(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
-
     }//Fin constructor
 
     public void setPosX(double posX) {

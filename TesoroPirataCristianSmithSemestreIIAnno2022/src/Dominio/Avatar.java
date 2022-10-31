@@ -7,7 +7,9 @@ public class Avatar {
     private String IdAvatar;
     private BufferedImage img;
     
-    public Avatar(){}
+    public Avatar(){
+        this.IdAvatar = "";
+    }
 
     @Override
     public String toString() {

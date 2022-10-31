@@ -4,7 +4,6 @@ import Dominio.Avatar;
 import Dominio.Juego;
 import Dominio.Jugador;
 import Dominio.Moneda;
-import java.awt.Color;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -12,15 +11,14 @@ public class RegistrarUsuario extends javax.swing.JDialog {
 
     private Juego juego;
     private Jugador jugador;
-    private Avatar avatar;
+    private String avatarSeleccionado;
 
     public RegistrarUsuario(java.awt.Frame parent, boolean modal, Juego juego) {
         super(parent, modal);
-        this.avatar = new Avatar();
-        this.avatar.setIdAvatar("");
         this.juego = juego;
         this.juego.setJugadores(new LinkedList<>());
-        this.jugador = new Jugador(0, 0);
+        this.jugador = new Jugador();
+        this.avatarSeleccionado = "";
         initComponents();
     }
 
@@ -140,28 +138,28 @@ public class RegistrarUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtMenuPrincipalActionPerformed
 
     private void jbtAvatarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAvatarUnoActionPerformed
-        this.avatar.setIdAvatar(jbtAvatarUno.getText());
+        this.avatarSeleccionado = jbtAvatarUno.getText();
         reiniciarEstadoBotones("jbtAvatarUno");
     }//GEN-LAST:event_jbtAvatarUnoActionPerformed
 
     private void jbtAvatarDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAvatarDosActionPerformed
-        this.avatar.setIdAvatar(jbtAvatarDos.getText());
+        this.avatarSeleccionado = jbtAvatarDos.getText();
         reiniciarEstadoBotones("jbtAvatarDos");
     }//GEN-LAST:event_jbtAvatarDosActionPerformed
 
     private void jbtAvatarTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAvatarTresActionPerformed
-        this.avatar.setIdAvatar(jbtAvatarTres.getText());
+        this.avatarSeleccionado = jbtAvatarTres.getText();
         reiniciarEstadoBotones("jbtAvatarTres");
     }//GEN-LAST:event_jbtAvatarTresActionPerformed
 
     private void jbtAvatarCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAvatarCuatroActionPerformed
-        this.avatar.setIdAvatar(jbtAvatarCuatro.getText());
+        this.avatarSeleccionado = jbtAvatarCuatro.getText();
         reiniciarEstadoBotones("jbtAvatarCuatro");
     }//GEN-LAST:event_jbtAvatarCuatroActionPerformed
 
     private void jbtRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtRegistrarActionPerformed
         if (jtfJugador.getText().equalsIgnoreCase("")
-                || this.avatar.getIdAvatar().equalsIgnoreCase("")) {
+                ||  this.avatarSeleccionado.equalsIgnoreCase("")) {
             mostrarMensaje("Nombre de jugador y avatar son obligatorios", 2);
         } else {
             //valida cantidad de jugadores resgistrados
@@ -171,9 +169,12 @@ public class RegistrarUsuario extends javax.swing.JDialog {
                     mostrarMensaje("Jugador ya esta registrado", 0);
                 } else {
                     //crear jugador con nombre usuario, avatar y monedero
-                    this.jugador = new Jugador(0, 0);
+                    this.jugador = new Jugador();
                     this.jugador.setNombreUsuario(jtfJugador.getText());
-                    this.jugador.setAvatar(this.avatar);
+                    //asingar avatar
+                    Avatar avatar = new Avatar(this.avatarSeleccionado);
+                    this.jugador.setAvatar(avatar);
+                    //agregar moneda al monedero
                     Moneda moneda = new Moneda(jugador.getNombreUsuario());
                     LinkedList<Moneda> monedero = new LinkedList<>();
                     monedero.add(moneda);
@@ -186,6 +187,7 @@ public class RegistrarUsuario extends javax.swing.JDialog {
                     mostrarMensaje("jugador registrado: " + this.jugador.getNombreUsuario(), 1);
                     System.out.println("jugador registrado: " + this.jugador.toString());
 
+                    this.avatarSeleccionado = "";
                     limpiarCampos();
                 }
 
@@ -197,9 +199,17 @@ public class RegistrarUsuario extends javax.swing.JDialog {
         
         //listo para tirar ruleta?
         if(partidaLista()){
+            //ocultar registro de jugadores
+            this.setVisible(false); 
+            
             mostrarMensaje("Jugadores listos, se mostrara la pantalla de tirar ruleta", 1);
+            
             //iniciar Jdialog de ruleta
             System.out.println("Iniciando ruleta...");
+            Ruleta ruleta = new Ruleta(new javax.swing.JFrame(), true, this.juego);
+            ruleta.setLocationRelativeTo(null);
+            ruleta.setVisible(true);
+                         
         }else{
             System.out.println("todavia faltan jugadores para tirar ruleta..");
         }
@@ -246,7 +256,6 @@ public class RegistrarUsuario extends javax.swing.JDialog {
         jbtAvatarDos.setEnabled(true);
         jbtAvatarTres.setEnabled(true);
         jbtAvatarCuatro.setEnabled(true);
-        this.avatar.setIdAvatar("");
     }
 
     //muestra mensaje para el usuario
