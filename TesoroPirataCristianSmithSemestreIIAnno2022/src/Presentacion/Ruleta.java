@@ -1,6 +1,7 @@
 package Presentacion;
 
 import Dominio.Juego;
+import Dominio.Jugador;
 import Dominio.NumeroRuleta;
 import java.util.LinkedList;
 
@@ -9,6 +10,8 @@ public class Ruleta extends javax.swing.JDialog {
     private Juego juego;
     private int jugadorRuleta = 0;
     private LinkedList<NumeroRuleta> resultadosRuleta;
+    
+    private final int vectorTurnos[] = {12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 
     public Ruleta(java.awt.Frame parent, boolean modal, Juego juego) {
         super(parent, modal);
@@ -182,6 +185,71 @@ public class Ruleta extends javax.swing.JDialog {
     }
 
     private void establecerTurnos() {
-          
+        
+        int turno = 1;
+        
+        switch (this.juego.getIdJuego()) {
+            case 2:
+                for(int valorTurno : this.vectorTurnos){
+                    for(Jugador jugador : this.juego.getJugadores()){
+                        if(this.juego.getJugadores().get(0).getNumeroRuleta() == valorTurno){
+                            this.juego.getJugadores().get(0).setTurno(turno);
+                            turno++;
+                        }
+                        if(this.juego.getJugadores().get(1).getNumeroRuleta() == valorTurno){
+                            this.juego.getJugadores().get(1).setTurno(turno);
+                            turno++;
+                        }
+                    }
+                }
+                break;
+            case 3:
+                for(int valorTurno : this.vectorTurnos){
+                    for(Jugador jugador : this.juego.getJugadores()){
+                        if(this.juego.getJugadores().get(0).getNumeroRuleta() == valorTurno){
+                            this.juego.getJugadores().get(0).setTurno(turno);
+                            turno++;
+                        }
+                        if(this.juego.getJugadores().get(1).getNumeroRuleta() == valorTurno){
+                            this.juego.getJugadores().get(1).setTurno(turno);
+                            turno++;
+                        }
+                        if(this.juego.getJugadores().get(2).getNumeroRuleta() == valorTurno){
+                            this.juego.getJugadores().get(2).setTurno(turno);
+                            turno++;
+                        }
+                    }
+                }
+                break;
+            case 4:
+                for(int valorTurno : this.vectorTurnos){
+                    for(Jugador jugador : this.juego.getJugadores()){
+                        if(this.juego.getJugadores().get(0).getNumeroRuleta() == valorTurno){
+                            this.juego.getJugadores().get(0).setTurno(turno);
+                            turno++;
+                        }
+                        if(this.juego.getJugadores().get(1).getNumeroRuleta() == valorTurno){
+                            this.juego.getJugadores().get(1).setTurno(turno);
+                            turno++;
+                        }
+                        if(this.juego.getJugadores().get(2).getNumeroRuleta() == valorTurno){
+                            this.juego.getJugadores().get(2).setTurno(turno);
+                            turno++;
+                        }
+                        if(this.juego.getJugadores().get(3).getNumeroRuleta() == valorTurno){
+                            this.juego.getJugadores().get(3).setTurno(turno);
+                            turno++;
+                        }
+                    }
+                }
+                break;
+        }
+        
+        //empezar juego, iniciar graphics
+        System.out.println("Turnos cargados");
+        for(Jugador jugador : this.juego.getJugadores()){
+            System.out.println(jugador.toString());
+        }
+        
     }
 }
