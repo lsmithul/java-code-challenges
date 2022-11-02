@@ -202,7 +202,7 @@ public class RegistrarUsuario extends javax.swing.JDialog {
             //ocultar registro de jugadores
             this.setVisible(false); 
             
-            mostrarMensaje("Jugadores listos, se mostrara la pantalla de tirar ruleta", 1);
+            mostrarMensaje("Jugadores listos, se mostrara la pantalla de girar ruleta", 1);
             
             //iniciar Jdialog de ruleta
             System.out.println("Iniciando ruleta...");
