@@ -5,9 +5,10 @@ import Dominio.Juego;
 import Dominio.Jugador;
 import Dominio.Moneda;
 import java.util.LinkedList;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-public class RegistrarUsuario extends javax.swing.JDialog {
+public class RegistrarUsuario extends JDialog {
 
     private Juego juego;
     private Jugador jugador;
@@ -171,7 +172,7 @@ public class RegistrarUsuario extends javax.swing.JDialog {
                     //crear jugador con nombre usuario, avatar y monedero
                     this.jugador = new Jugador();
                     this.jugador.setNombreUsuario(jtfJugador.getText());
-                    //asingar avatar
+                    //asignar avatar
                     Avatar avatar = new Avatar(this.avatarSeleccionado);
                     this.jugador.setAvatar(avatar);
                     //agregar moneda al monedero

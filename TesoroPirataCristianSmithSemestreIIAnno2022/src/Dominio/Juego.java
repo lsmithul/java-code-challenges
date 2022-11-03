@@ -12,23 +12,19 @@ public class Juego {
     private Tablero tablero;
 
     public Juego() {
-        this.IdJuego = IdJuego;
+       
+    }//Fin constructor 
+    
+    public Juego(int idJuego, LinkedList<Jugador> jugadores, Casilla casillas[], CartaArma cartasArma[], Tablero tablero){
+        this.IdJuego = idJuego;
         this.jugadores = jugadores;
         this.casillas = casillas;
         this.cartasArma = cartasArma;
         this.tablero = tablero;
-    }//Fin constructor 
-
-    public Juego(LinkedList<Jugador> jugadores, Tablero tablero) {
-        this.jugadores = jugadores;
-        this.tablero = tablero;
-
-    } // constructor
+    }//fin constructor sobrecargdo
 
     public void dibujar(Graphics g) {
-
         this.tablero.dibujar(g);
-
     }
 
     public int getIdJuego() {
@@ -42,11 +38,11 @@ public class Juego {
     public LinkedList<Jugador> getJugadores() {
         return jugadores;
     }
-    
-    public Jugador getJugadorDeJugadores(String nombreUsuario){
-        Jugador jugadorARecuperar = new Jugador(0,0);
-        for (Jugador jugador : this.jugadores){
-            if(jugador.getNombreUsuario().equalsIgnoreCase(nombreUsuario)){
+
+    public Jugador getJugadorDeJugadores(String nombreUsuario) {
+        Jugador jugadorARecuperar = new Jugador(0, 0);
+        for (Jugador jugador : this.jugadores) {
+            if (jugador.getNombreUsuario().equalsIgnoreCase(nombreUsuario)) {
                 jugadorARecuperar = jugador;
             }
         }
@@ -56,8 +52,8 @@ public class Juego {
     public void setJugadores(LinkedList<Jugador> jugadores) {
         this.jugadores = jugadores;
     }
-    
-    public void setJugadorEnJugadores(Jugador jugador){
+
+    public void setJugadorEnJugadores(Jugador jugador) {
         this.jugadores.add(jugador);
     }
 

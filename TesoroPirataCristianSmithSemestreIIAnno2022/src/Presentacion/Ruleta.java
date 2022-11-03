@@ -4,8 +4,9 @@ import Dominio.Juego;
 import Dominio.Jugador;
 import Dominio.NumeroRuleta;
 import java.util.LinkedList;
+import javax.swing.JDialog;
 
-public class Ruleta extends javax.swing.JDialog {
+public class Ruleta extends JDialog {
 
     private Juego juego;
     private int jugadorRuleta = 0;

@@ -1,8 +1,9 @@
 package Presentacion;
 
 import Dominio.Juego;
+import javax.swing.JFrame;
 
-public class MenuPrincipal extends javax.swing.JFrame {
+public class MenuPrincipal extends JFrame {
 
     private Juego juego;
     
