@@ -4,8 +4,9 @@ import Dominio.Juego;
 import Dominio.Jugador;
 import Dominio.NumeroRuleta;
 import java.util.LinkedList;
+import javax.swing.JDialog;
 
-public class Ruleta extends javax.swing.JDialog {
+public class Ruleta extends JDialog {
 
     private Juego juego;
     private int jugadorRuleta = 0;
@@ -247,7 +248,18 @@ public class Ruleta extends javax.swing.JDialog {
         }
         
         //mostrar ventana de graphics
+        this.setVisible(false);
+                
+        JDialog ventanaTablero = new JDialog(new javax.swing.JFrame(), true);
         
-
+        ventanaTablero.setTitle("Tesoro Pirata");
+         
+        ventanaTablero.add(new Tablero(this.juego));
+        ventanaTablero.pack();
+        
+        ventanaTablero.setLocationRelativeTo(null);
+        
+        ventanaTablero.setVisible(true);
+        
     }
 }

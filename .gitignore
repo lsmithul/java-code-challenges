@@ -1,3 +1,11 @@
-TesoroPirataCristianSmithSemestreIIAnno2022/build/
-TesoroPirataCristianSmithSemestreIIAnno2022/nbproject/private/private.properties
-TesoroPirataCristianSmithSemestreIIAnno2022/dist/TesoroPirataCristianSmithSemestreIIAnno2022.jar
+TesoroPirataCristianSmithSemestreIIAnno2022/
++ build/
++ dist/
++ nbproject/
+  build-impl.xml
+  + private/
+  + project.properties
+  + project.xml
++ src/
++ test/
++ build.xml
