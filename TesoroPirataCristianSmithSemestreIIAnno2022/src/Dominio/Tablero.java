@@ -33,7 +33,7 @@ public class Tablero {
         for(int i=0; i<this.tablero.length; i++){
             for(int j=0; j<this.tablero[i].length; j++){
                 if(tablero[i][j]==1)
-                    this.casillas[i][j]=new Casilla(j*40, i*40);
+                    this.casillas[i][j]=new Casilla(j*40, i*40, "");
             } // for j
         } // for i
     } // crearTablero

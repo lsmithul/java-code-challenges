@@ -248,7 +248,18 @@ public class Ruleta extends JDialog {
         }
         
         //mostrar ventana de graphics
+        this.setVisible(false);
+                
+        JDialog ventanaTablero = new JDialog(new javax.swing.JFrame(), true);
         
-
+        ventanaTablero.setTitle("Tesoro Pirata");
+         
+        ventanaTablero.add(new Tablero(this.juego));
+        ventanaTablero.pack();
+        
+        ventanaTablero.setLocationRelativeTo(null);
+        
+        ventanaTablero.setVisible(true);
+        
     }
 }

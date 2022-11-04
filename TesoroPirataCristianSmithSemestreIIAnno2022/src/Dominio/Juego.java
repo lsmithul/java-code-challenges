@@ -7,7 +7,7 @@ public class Juego {
 
     private int IdJuego;
     private LinkedList<Jugador> jugadores;
-    private Casilla casillas[];
+    private LinkedList<Casilla> casillas;
     private CartaArma cartasArma[];
     private Tablero tablero;
 
@@ -15,7 +15,7 @@ public class Juego {
        
     }//Fin constructor 
     
-    public Juego(int idJuego, LinkedList<Jugador> jugadores, Casilla casillas[], CartaArma cartasArma[], Tablero tablero){
+    public Juego(int idJuego, LinkedList<Jugador> jugadores, LinkedList<Casilla> casillas, CartaArma cartasArma[], Tablero tablero){
         this.IdJuego = idJuego;
         this.jugadores = jugadores;
         this.casillas = casillas;
@@ -57,11 +57,11 @@ public class Juego {
         this.jugadores.add(jugador);
     }
 
-    public Casilla[] getCasillas() {
+    public LinkedList<Casilla> getCasillas() {
         return casillas;
     }
 
-    public void setCasillas(Casilla[] casillas) {
+    public void setCasillas(LinkedList<Casilla> casillas) {
         this.casillas = casillas;
     }
 

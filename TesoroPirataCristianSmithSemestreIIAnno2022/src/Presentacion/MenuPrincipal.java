@@ -94,7 +94,7 @@ public class MenuPrincipal extends JFrame {
         RegistrarUsuario regUsuario = new RegistrarUsuario(new javax.swing.JFrame(), true, this.juego);
         regUsuario.setLocationRelativeTo(null);
         regUsuario.setTitle("Registro de jugadores");
-        regUsuario.setVisible(true);  
+        regUsuario.setVisible(true); 
     }//GEN-LAST:event_jbtDosJugadoresActionPerformed
 
     private void jbtSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSalirActionPerformed
@@ -107,7 +107,7 @@ public class MenuPrincipal extends JFrame {
         RegistrarUsuario regUsuario = new RegistrarUsuario(new javax.swing.JFrame(), true, this.juego);
         regUsuario.setLocationRelativeTo(null);
         regUsuario.setTitle("Registro de jugadores");
-        regUsuario.setVisible(true);  
+        regUsuario.setVisible(true);
     }//GEN-LAST:event_jbtTresJugadoresActionPerformed
 
     private void jbtCuatroJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCuatroJugadoresActionPerformed
@@ -116,7 +116,7 @@ public class MenuPrincipal extends JFrame {
         RegistrarUsuario regUsuario = new RegistrarUsuario(new javax.swing.JFrame(), true, this.juego);
         regUsuario.setLocationRelativeTo(null);
         regUsuario.setTitle("Registro de jugadores");
-        regUsuario.setVisible(true);  
+        regUsuario.setVisible(true);
     }//GEN-LAST:event_jbtCuatroJugadoresActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
